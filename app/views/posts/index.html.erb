@@ -1,0 +1,230 @@
+
+<div id='top-bar'>
+    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+    <i class="fa fa-instagram" aria-hidden="true"></i>
+    <i class="fa fa-twitter" aria-hidden="true"></i>
+    <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+    <i class="fa fa-snapchat-square" aria-hidden="true"></i>
+    <ul>
+</div>
+
+<div class="page">
+  <h1 class="page-title">The Jobdam</h1>
+  <div class="grid">
+    <div class="item small-ad">
+      <a class="link-block" href="#">
+        Working <span class="serif">Holiday</span> Australia
+      </a>
+    </div>
+    <div class="item article-header">
+      <h2 class="title-block">
+        <div class='console-container'><span id='text'></span><div class='console-underscore' id='console'>&#95;</div></div>
+      </h2>
+      <h3 class="title-tag serif">
+        <% if user_signed_in? %>
+          <%= link_to "Log out", destroy_user_session_path, class: "membership", method: :delete %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: "membership" %>
+          <%= link_to "Sing Up", new_user_registration_path, class: "membership" %>
+        <% end %>
+      </h3>
+    </div>
+    <div class="item article-body">
+      <p class="text serif">
+        Inspired by painter Yago Hortal’s one-of-a-kind, vivid artwork, this set features 40 shades of color for cheeks and eyes. The panels easily pop in and out, making it perfectly portable for holiday trips. Smashbox partnered with breakthrough artist Yago
+        Hortal to create these mega-vibrant, limited-edition kits featuring all of their bestsellers in a range of shades—from bold pops of color to always-flattering neutrals. </p>
+     <h3 class="btn_write"><%= link_to "글쓰기", new_post_path %></h3>
+    </div>
+    <div class="item bg-block">
+      <div class="bg-block__wrapper">
+        <h2 class="title-small">
+          <% if user_signed_in? %>
+           Hello,<%= link_to current_user.name, edit_user_registration_path %>
+          <% else %>
+           Hello
+          <% end %>
+        </h2>
+        <p class="text-block">
+          Share
+          <br/>your story</br>Listen <span class="block">what are stories others.</span> 
+      </div>
+    </div>
+    <div class="item community">
+      <div class="community-header">
+        <h2 class="title-block-small">Our <span class="serif block italic">Community</span></h2>
+        <h3 class="title-block-small">Featuring: You!</h3>
+      </div>
+      <div class="img-grid">
+        <a href=""><img src="http://placehold.it/150x150" /></a>
+        <a href=""><img src="http://placehold.it/150x150" /></a>
+        <a href=""><img src="http://placehold.it/150x150" /></a>
+        <a href=""><img src="http://placehold.it/150x150" /></a>
+      </div>
+    </div>
+    <div class="item footer">
+      <h2 class="title-small">Shop By</h2>
+      <ul class="nav">
+        <li><a href="">Makeup</a></li>
+        <li><a href="">Skincare</a></li>
+        <li><a href="">Fragrance</a></li>
+        <li><a href="">Bath & Body</a></li>
+        <li><a href="">Nails</a></li>
+        <li><a href="">Hair</a></li>
+        <li><a href="">Tools & Brushes</a></li>
+        <li><a href="">Men</a></li>
+        <li><a href="">Gifts</a></li>
+        <li><a href="">Sales</a></li>
+        <li><a href="">Brands</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="topnav" id="myTopnav">
+  <%= link_to "All Stories", root_path %>
+  <% Category.all.each do |category| %>
+    <%= link_to category.name, posts_path(category: category.name) %>
+  <% end %>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+
+
+<div id='main-wrap' class='row'>
+
+    <div class='col-8'>
+        <div id='posts-wrap'>
+          <% @posts.each do |post| %> 
+          
+            <div class='posts-single'>
+              <!-- # <%= link_to (image_tag post.image.url(:small)), post %> -->
+              <h3 class='posts-title'><%= link_to post.title, post %></h3>
+              <!-- <p class='posts-title'>Title description, <span class='posts-date'>March 23, 2017</span></p> -->
+              <p class='posts-text'><%= link_to post.description, post %></p></br>
+
+              <span class='posts-date'>Shared by <%= post.try(:user).try(:name) %></span>
+              <span class='posts-date'><%= time_ago_in_words(post.created_at) %> ago</span>
+              
+              <div class="comments-likes-size">
+                <span>
+                  <i class="fa fa-comments-o"></i>
+                  <%= post.comments.count %>
+                </span>
+                <span>
+                  <i class="fa fa-thumbs-o-up"></i>
+                  <%= post.get_likes.size %>
+                </span>
+              </div>
+            </div>
+
+          <% end %>
+           
+      </div>
+    </div> 
+
+    
+    <div class='col-4' id='aside-container'>
+        
+        <!-- <div id='aside-about' class='aside-single'>
+            <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/avatar_girl2.jpg' alt='avatar girl' width='300px' height='160px' />
+            <div class='aside-title'>
+                <h3>My Name</h3>
+                <p>Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
+            </div>
+        </div> -->
+      
+        
+        <div id='aside-popular' class='aside-single'>
+            <div class='aside-title'>
+                <h3>Popular Posts</h3>
+            </div>
+            <div class='aside-text aside-popular-single'>
+                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/avatar_smoke.jpg' alt='avatar smoke' width='200px' height='223px' />
+                <div class='aside-popular-text'>
+                    <h3>Denim</h3>
+                    <p>Sed mattis nunc</p>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+            <div class='aside-text aside-popular-single'>
+                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/bandmember.jpg' alt='band member' width='255px' height='255px' />
+                <div class='aside-popular-text'>
+                    <h3>Sweaters</h3>
+                    <p>Praes tinci sed</p>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+             <div class='aside-text aside-popular-single'>
+                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/workshop.jpg' alt='workshop' width='300px' height='300px' />
+                <div class='aside-popular-text'>
+                    <h3>Workshop</h3>
+                    <p>Ultricies congue</p>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+            <div class='aside-text aside-popular-single'>
+                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/girl_hood.jpg' alt='avatar hat' width='200px' height='223px' />
+                <div class='aside-popular-text'>
+                    <h3>Hats</h3>
+                    <p>Ut enim ad minim veniam</p>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+        </div>
+        
+        <div class='aside-single' id='aside-avdert'>
+            <div class='aside-title'>
+                <h3>Advertise</h3>
+            </div>
+            <div class='aside-text'>
+                <div id='aside-ad-content'>
+                    Your AD Here
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class='aside-single' id='aside-tags'>
+            <div class='aside-title'>
+                <h3>Tags</h3>
+            </div>
+            <div class='aside-text' id='aside-tag-cloud'>
+                <p><span id='aside-tag-active'>Fashin</span><span>New York</span><span>London</span><span>Hats</span><span>Norway</span><span>Sweaters</span><span>Ideas</span><span>Deals</span><span>Accessories</span><span>News</span><span>Clothing</span><span>Shopping</span><span>Jeans</span><span>Trends</span></p>
+            </div>
+        </div>
+        
+        <div class='aside-single' id='aside-inspiration'>
+            <div class='aside-title'>
+                <h3>Inspiration</h3>
+            </div>
+            <div class='aside-text' id='aside-insp-content'>
+                <div>
+                    <div class='aside-insp-single'>
+                        <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/jeans.jpg' alt='jeans' width='1200px' height='800px' />
+                    </div>
+                    <div class='aside-insp-single'>
+                        <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/avatar_hat.jpg' alt='avatar_hat' width='500px' height='333px' />
+                    </div>
+                </div>
+                    <div class='clear-float'></div>
+                    <div>
+                    <div class='aside-insp-single'>
+                        <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/team1.jpg' alt='girl with a hat' width='500px' height='333px' />
+                    </div>
+                    <div class='aside-insp-single'>
+                        <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/team4.jpg' alt='guy' width='500px' height='333px' />
+                    </div>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+<div id='footer'>
+    <a href='#'><i class="fa fa-arrow-up" aria-hidden="true"></i> To the top</a>
+    <p>Developed by <a href='http://viblaze.co.uk' target='_blank'>Viblaze</a>.</p>
+    <p>Design tamplate from <a href='https://w3schools.com' target='_blank'>www.w3schools.com</a></p>
+</div>

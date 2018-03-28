@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Thejobdam</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="jquery-3.2.0.min.js"></script>
+
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    
+  </head>
+
+  <body>
+       
+   <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p>
+
+    <%= yield %>
+    <%= javascript_include_tag 'application' %>
+
+    <script>
+     function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+     }
+    </script>
+
+
+ <script>
+      // function([string1, string2],target id,[color1,color2])    
+   consoleText(['Share', 'Your', 'Story'], 'text',['black','black','black']);
+
+  function consoleText(words, id, colors) {
+    if (colors === undefined) colors = ['#fff'];
+    var visible = true;
+    var con = document.getElementById('console');
+    var letterCount = 1;
+    var x = 1; 
+    var waiting = false;
+    var target = document.getElementById(id)
+    target.setAttribute('style', 'color:' + colors[0])
+    window.setInterval(function() {
+
+      if (letterCount === 0 && waiting === false) {
+        waiting = true;
+        target.innerHTML = words[0].substring(0, letterCount)
+        window.setTimeout(function() {
+          var usedColor = colors.shift();
+          colors.push(usedColor);
+          var usedWord = words.shift();
+          words.push(usedWord);
+          x = 1;
+          target.setAttribute('style', 'color:' + colors[0])
+          letterCount += x;
+          waiting = false;
+        }, 1000)
+      } else if (letterCount === words[0].length + 1 && waiting === false) {
+        waiting = true;
+        window.setTimeout(function() {
+          x = -1;
+          letterCount += x;
+          waiting = false;
+        }, 1000)
+      } else if (waiting === false) {
+        target.innerHTML = words[0].substring(0, letterCount)
+        letterCount += x;
+      }
+    }, 120)
+    window.setInterval(function() {
+      if (visible === true) {
+        con.className = 'console-underscore hidden'
+        visible = false;
+
+      } else {
+        con.className = 'console-underscore'
+
+        visible = true;
+      }
+    }, 400)
+  }
+ </script>
+  </body>
+</html>

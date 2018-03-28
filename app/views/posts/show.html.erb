@@ -1,0 +1,183 @@
+
+<div id='top-bar'>
+    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+    <i class="fa fa-instagram" aria-hidden="true"></i>
+    <i class="fa fa-twitter" aria-hidden="true"></i>
+    <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+    <i class="fa fa-snapchat-square" aria-hidden="true"></i>
+</div>
+
+<div class="page">
+  <h1 class="page-title"><a href="/">The Jobdam</a></h1>
+</div>
+
+<div id='main-wrap' class='row'>
+
+    <div class='col-8'>
+        <div id='posts-wrap'>
+            
+            <!-- SINGLE POST -->
+            <div class='posts-single'>
+              <!-- # <%= image_tag @post.image.url(:medium) %> -->
+              <h3 class='posts-title'><%= @post.title %></h3>
+              <p><span class='posts-date'>Shard by <%= @post.user.name %>  <%= time_ago_in_words(@post.created_at) %> ago</span></p>
+              <p class='posts-title'><%= @post.link %></p>
+              <p class='posts-text-show'><%= @post.description %></p></br>
+              
+              <div class="posts-vote">
+                <%= link_to like_post_path(@post), method: :get, class: "data" do %>
+                  <i class="fa fa-thumbs-o-up"></i>
+                  <%= pluralize(@post.get_upvotes.size, "Like") %>
+                <% end %>
+                <%= link_to dislike_post_path(@post), method: :get, class: "data" do %>
+                  <i class="fa fa-thumbs-o-down"></i>
+                  <%= pluralize(@post.get_downvotes.size, "Dislike") %>
+                <% end %>
+              </div>
+
+              <div class="posts-edit_delete">
+                <% if @post.user == current_user %>
+                  <%= link_to "Edit", edit_post_path(@post), class: "edit" %>
+                  <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class: "delete" %>
+                <% end %>
+              </div>
+ 
+
+              <div id="comments">
+                <%= render "comments/form" %>
+                <h2 class="comment_count">
+                  <i class="fa fa-comments-o"></i>
+                  <%= pluralize(@post.comments.count, "Comment") %>
+                </h2>
+                <% @comments.reverse.each do |comment| %>
+                  <div class="comment">
+                    <p class="username"><%= comment.content %></p>
+                    <p class="content"><%= comment.user.name %> <%= time_ago_in_words(comment.created_at) %> ago</p>
+
+                   <div class="comment_delete">
+                   <% if user_signed_in? %>
+                     <% if comment.user_id == current_user.id %>
+                      <%= link_to "Delete", post_comment_path(comment.post, comment), class: "comment_delete_btn", method: :delete, data: { confirm: "Are  you sure?" } %>
+                     <% end %>
+                    <% end %>
+                   </div>
+                  </div>
+                <% end %>
+                
+              </div>
+            </div>
+              
+      </div>
+    </div> 
+    
+    <div class='col-4' id='aside-container'>
+        
+        <!-- <div id='aside-about' class='aside-single'>
+            <div class='aside-title'>
+                <h3>My Name</h3>
+                <p>Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
+            </div>
+        </div> -->
+        
+        <!-- ----- POPULAR POSTS ----- -->
+        
+        <div id='aside-popular' class='aside-single'>
+            <div class='aside-title'>
+                <h3>Popular Posts</h3>
+            </div>
+            <div class='aside-text aside-popular-single'>
+                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/avatar_smoke.jpg' alt='avatar smoke' width='200px' height='223px' />
+                <div class='aside-popular-text'>
+                    <h3>Denim</h3>
+                    <p>Sed mattis nunc</p>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+            <div class='aside-text aside-popular-single'>
+                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/bandmember.jpg' alt='band member' width='255px' height='255px' />
+                <div class='aside-popular-text'>
+                    <h3>Sweaters</h3>
+                    <p>Praes tinci sed</p>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+             <div class='aside-text aside-popular-single'>
+                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/workshop.jpg' alt='workshop' width='300px' height='300px' />
+                <div class='aside-popular-text'>
+                    <h3>Workshop</h3>
+                    <p>Ultricies congue</p>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+            <div class='aside-text aside-popular-single'>
+                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/girl_hood.jpg' alt='avatar hat' width='200px' height='223px' />
+                <div class='aside-popular-text'>
+                    <h3>Hats</h3>
+                    <p>Ut enim ad minim veniam</p>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+        </div>
+        
+        <!-- ----- ADVERTISE ----- -->
+        
+        <div class='aside-single' id='aside-avdert'>
+            <div class='aside-title'>
+                <h3>Advertise</h3>
+            </div>
+            <div class='aside-text'>
+                <div id='aside-ad-content'>
+                    Your AD Here
+                </div>
+            </div>
+        </div>
+        
+        <!-- ----- TAGS ----- -->
+        
+        <div class='aside-single' id='aside-tags'>
+            <div class='aside-title'>
+                <h3>Tags</h3>
+            </div>
+            <div class='aside-text' id='aside-tag-cloud'>
+                <p><span id='aside-tag-active'>Fashin</span><span>New York</span><span>London</span><span>Hats</span><span>Norway</span><span>Sweaters</span><span>Ideas</span><span>Deals</span><span>Accessories</span><span>News</span><span>Clothing</span><span>Shopping</span><span>Jeans</span><span>Trends</span></p>
+            </div>
+        </div>
+        
+         <!-- ----- INSPIRATION ----- -->
+        
+        <div class='aside-single' id='aside-inspiration'>
+            <div class='aside-title'>
+                <h3>Inspiration</h3>
+            </div>
+            <div class='aside-text' id='aside-insp-content'>
+                <div>
+                    <div class='aside-insp-single'>
+                        <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/jeans.jpg' alt='jeans' width='1200px' height='800px' />
+                    </div>
+                    <div class='aside-insp-single'>
+                        <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/avatar_hat.jpg' alt='avatar_hat' width='500px' height='333px' />
+                    </div>
+                </div>
+                    <div class='clear-float'></div>
+                    <div>
+                    <div class='aside-insp-single'>
+                        <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/team1.jpg' alt='girl with a hat' width='500px' height='333px' />
+                    </div>
+                    <div class='aside-insp-single'>
+                        <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/team4.jpg' alt='guy' width='500px' height='333px' />
+                    </div>
+                </div>
+                <div class='clear-float'></div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- ----- FOOTER ----- -->
+
+<div id='footer'>
+    <a href='#'><i class="fa fa-arrow-up" aria-hidden="true"></i> To the top</a>
+    <p>Developed by <a href='http://viblaze.co.uk' target='_blank'>Viblaze</a>.</p>
+    <p>Design tamplate from <a href='https://w3schools.com' target='_blank'>www.w3schools.com</a></p>
+</div>
