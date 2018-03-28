@@ -24,11 +24,13 @@
               <p class='posts-title'><%= @post.link %></p>
               <p class='posts-text-show'><%= @post.description %></p></br>
               
+
               <div class="posts-vote">
+                <i class="fa fa-eye"></i> <%= @post.impressionist_count(:filter=>:ip_address) %>&emsp;
                 <%= link_to like_post_path(@post), method: :get, class: "data" do %>
                   <i class="fa fa-thumbs-o-up"></i>
                   <%= pluralize(@post.get_upvotes.size, "Like") %>
-                <% end %>
+                <% end %>&emsp;
                 <%= link_to dislike_post_path(@post), method: :get, class: "data" do %>
                   <i class="fa fa-thumbs-o-down"></i>
                   <%= pluralize(@post.get_downvotes.size, "Dislike") %>

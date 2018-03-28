@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   
   before_action :find_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
+  impressionist :actions=>[:show]
 
   def index
     if params[:category].blank?
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
 
   def show
     @comments = Comment.where(post_id: @post)
+    impressionist(@post)
   end
 
   def new

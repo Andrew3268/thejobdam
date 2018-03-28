@@ -106,6 +106,7 @@
               <span class='posts-date'><%= time_ago_in_words(post.created_at) %> ago</span>
               
               <div class="comments-likes-size">
+                <i class="fa fa-eye"></i> <%= post.impressionist_count(:filter=>:ip_address) %>&emsp;
                 <span>
                   <i class="fa fa-comments-o"></i>
                   <%= post.comments.count %>
