@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  resourcify
   is_impressionable
   acts_as_votable
   

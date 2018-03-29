@@ -40,6 +40,9 @@ gem 'paperclip', '~> 6.0'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'impressionist'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'cancancan'
+gem 'rolify'
+
 
 
 group :development, :test do

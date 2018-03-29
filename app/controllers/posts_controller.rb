@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
   impressionist :actions=>[:show]
+  load_and_authorize_resource
 
   def index
     @votes = Post.order(:cached_votes_up => :desc).limit(5)

@@ -38,10 +38,12 @@
               </div>
 
               <div class="posts-edit_delete">
-                <% if @post.user == current_user %>
+                 <% if can? :update, @post %>
                   <%= link_to "Edit", edit_post_path(@post), class: "edit" %>
+                 <% end %>
+                 <% if can? :destroy, @post %>
                   <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class: "delete" %>
-                <% end %>
+                 <% end %>
               </div>
  
 
@@ -58,7 +60,7 @@
 
                    <div class="comment_delete">
                    <% if user_signed_in? %>
-                     <% if comment.user_id == current_user.id %>
+                     <% if can? :destroy, comment %>
                       <%= link_to "Delete", post_comment_path(comment.post, comment), class: "comment_delete_btn", method: :delete, data: { confirm: "Are  you sure?" } %>
                      <% end %>
                     <% end %>
