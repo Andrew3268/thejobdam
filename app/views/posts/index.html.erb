@@ -91,11 +91,12 @@
 
 
 <div id='main-wrap' class='row'>
-
+    
     <div class='col-8'>
         <div id='posts-wrap'>
+          <%= params[:category] %>
           <% @posts.each do |post| %> 
-          
+
             <div class='posts-single'>
               <!-- # <%= link_to (image_tag post.image.url(:small)), post %> -->
               <h3 class='posts-title'><%= link_to post.title, post %></h3>
@@ -139,14 +140,19 @@
             <div class='aside-title'>
                 <h3>Popular Posts</h3>
             </div>
-            <div class='aside-text aside-popular-single'>
-                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/avatar_smoke.jpg' alt='avatar smoke' width='200px' height='223px' />
-                <div class='aside-popular-text'>
-                    <h3>Denim</h3>
-                    <p>Sed mattis nunc</p>
-                </div>
-                <div class='clear-float'></div>
-            </div>
+
+            
+            <% @votes.each do |vote| %>
+              <div class='aside-text aside-popular-single'>
+                  <div class='aside-popular-text'>
+                      <h3><%= link_to vote.title, vote %></h3>
+                  </div>
+                  <div class='clear-float'></div>
+              </div>
+            <% end %>
+
+
+
             <div class='aside-text aside-popular-single'>
                 <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/bandmember.jpg' alt='band member' width='255px' height='255px' />
                 <div class='aside-popular-text'>

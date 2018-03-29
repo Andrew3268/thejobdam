@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   impressionist :actions=>[:show]
 
   def index
+    @votes = Post.order(:cached_votes_up => :desc).limit(5)
     if params[:category].blank?
       @posts = Post.all.order("created_at DESC").page(params[:page]).per(20)
     else
@@ -16,6 +17,7 @@ class PostsController < ApplicationController
   def show
     @comments = Comment.where(post_id: @post)
     impressionist(@post)
+    @votes = Post.order(:cached_votes_up => :desc).limit(5)
   end
 
   def new
