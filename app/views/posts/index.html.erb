@@ -137,46 +137,19 @@
       
         
         <div id='aside-popular' class='aside-single'>
-            <div class='aside-title'>
-                <h3>Popular Posts</h3>
-            </div>
+          <div class='aside-title'>
+              <h3>Popular Posts</h3>
+          </div>
 
-            
-            <% @votes.each do |vote| %>
-              <div class='aside-text aside-popular-single'>
-                  <div class='aside-popular-text'>
-                      <h3><%= link_to vote.title, vote %></h3>
-                  </div>
-                  <div class='clear-float'></div>
-              </div>
-            <% end %>
-
-
-
+          
+          <% @votes.each do |vote| %>
             <div class='aside-text aside-popular-single'>
-                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/bandmember.jpg' alt='band member' width='255px' height='255px' />
                 <div class='aside-popular-text'>
-                    <h3>Sweaters</h3>
-                    <p>Praes tinci sed</p>
+                    <h3><%= link_to vote.title, vote %></h3>
                 </div>
                 <div class='clear-float'></div>
             </div>
-             <div class='aside-text aside-popular-single'>
-                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/workshop.jpg' alt='workshop' width='300px' height='300px' />
-                <div class='aside-popular-text'>
-                    <h3>Workshop</h3>
-                    <p>Ultricies congue</p>
-                </div>
-                <div class='clear-float'></div>
-            </div>
-            <div class='aside-text aside-popular-single'>
-                <img src='http://viblaze.co.uk/MyFolder/MyWorks/BeautyBlog/girl_hood.jpg' alt='avatar hat' width='200px' height='223px' />
-                <div class='aside-popular-text'>
-                    <h3>Hats</h3>
-                    <p>Ut enim ad minim veniam</p>
-                </div>
-                <div class='clear-float'></div>
-            </div>
+          <% end %>
         </div>
         
         <div class='aside-single' id='aside-avdert'>

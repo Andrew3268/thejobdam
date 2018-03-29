@@ -429,12 +429,17 @@ span.posts-date {
     padding: 16px;
     background: white;
     color: #000;
+    border-radius: 0.3em 0.3em 0 0;
 }
 
 #aside-container {padding-top:0;}
 #aside-container p {margin: 0;}
 #aside-container h3 {margin: 0;}
-.aside-single {box-shadow: 0 0 7px rgba(0,0,0,0.1); margin-top:32px;}
+.aside-single {
+  box-shadow: 0 0 7px rgba(0,0,0,0.1); 
+  margin-top:32px;
+  border-radius: 0.3em;
+  }
 
 /* ----- ABOUT ----- */
 
